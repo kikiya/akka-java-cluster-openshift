@@ -216,7 +216,7 @@
                                     <exec>
                                         <args>/bin/sh</args>
                                         <args>-c</args>
-                                        <args>java -jar /maven/akka-cluster-openshift.jar</args>
+                                        <args>java -jar /maven/cluster-sharding-razpi.jar</args>
                                     </exec>
                                 </entryPoint>
                                 <assembly>
@@ -225,9 +225,9 @@
                                             <dependencySet>
                                                 <useProjectAttachments>true</useProjectAttachments>
                                                 <includes>
-                                                    <include>akka-java:akka-cluster-openshift:jar:allinone</include>
+                                                    <include>akka-java:cluster-sharding-razpi:jar:allinone</include>
                                                 </includes>
-                                                <outputFileNameMapping>akka-cluster-openshift.jar</outputFileNameMapping>
+                                                <outputFileNameMapping>cluster-sharding-razpi.jar</outputFileNameMapping>
                                             </dependencySet>
                                         </dependencySets>
                                     </inline>
