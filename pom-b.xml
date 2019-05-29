@@ -201,7 +201,7 @@
                         <image>
                             <name>akka-cluster-razpi:${docker.image.version}</name>
                             <build>
-                                <from>arm64v8/openjdk:8</from>
+                                <from>armv7/armhf-java8</from>
                                 <ports>
                                     <port>8080</port>
                                     <port>8558</port>
