@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>akka-java</groupId>
-    <artifactId>cluster-sharding-razpi</artifactId>
+    <artifactId>akka-cluster-razpi</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -204,7 +204,7 @@
                     </authConfig>
                     <images>
                         <image>
-                            <name>akka-cluster-demo:${docker.image.version}</name>
+                            <name>akka-cluster-razpi:${docker.image.version}</name>
                             <build>
                                 <from>arm64v8/openjdk:8</from>
                                 <ports>
@@ -216,7 +216,7 @@
                                     <exec>
                                         <args>/bin/sh</args>
                                         <args>-c</args>
-                                        <args>java -jar /maven/cluster-sharding-razpi.jar</args>
+                                        <args>java -jar /maven/akka-cluster-razpi.jar</args>
                                     </exec>
                                 </entryPoint>
                                 <assembly>
@@ -225,9 +225,9 @@
                                             <dependencySet>
                                                 <useProjectAttachments>true</useProjectAttachments>
                                                 <includes>
-                                                    <include>akka-java:cluster-sharding-razpi:jar:allinone</include>
+                                                    <include>akka-java:akka-cluster-razpi:jar:allinone</include>
                                                 </includes>
-                                                <outputFileNameMapping>cluster-sharding-razpi.jar</outputFileNameMapping>
+                                                <outputFileNameMapping>akka-cluster-razpi.jar</outputFileNameMapping>
                                             </dependencySet>
                                         </dependencySets>
                                     </inline>
