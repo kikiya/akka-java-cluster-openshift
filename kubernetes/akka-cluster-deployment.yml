@@ -1,15 +1,17 @@
-apiVersion: extensions/v1beta1
+# apiVersion: extensions/v1beta1
+apiVersion: "apps/v1beta2"
 kind: Deployment
 metadata:
+  name: akka-cluster-demo
+  namespace: akka-cluster-demo
   labels:
     app: akka-cluster-demo
-  name: akka-cluster-demo
-  namespace: akka-cluster-1
+    actorSystemName: akka-cluster-demo
 spec:
   replicas: 3
   selector:
     matchLabels:
-     app: akka-cluster-demo
+      app: akka-cluster-demo
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -23,27 +25,55 @@ spec:
         actorSystemName: akka-cluster-demo
     spec:
       containers:
-      - name: akka-cluster-demo
-        image: akka-cluster-demo:1.0.2
-        imagePullPolicy: Never
-        livenessProbe:
-          tcpSocket:
-            port: 8558
-        ports:
-        - name: http
-          containerPort: 8080
-          protocol: TCP
-        # akka remoting
-        - name: remoting
-          containerPort: 2552
-          protocol: TCP
-        # akka-management bootstrap
-        # must match up with contact-point-discovery.port-name for bootstrap
-        - name: management
-          containerPort: 8558
-          protocol: TCP
-        env:
-          - name: NAMESPACE
-            valueFrom:
-              fieldRef:
-                fieldPath: metadata.namespace
+        - name: akka-cluster-demo
+          image: docker-registry-default.gsa2.lightbend.com/lightbend/akka-cluster-demo:1.0.3
+          imagePullPolicy: Always
+          livenessProbe:
+            tcpSocket:
+              port: 8558
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+            # akka remoting
+            - name: remoting
+              containerPort: 2552
+              protocol: TCP
+            # akka-management bootstrap
+            # must match up with contact-point-discovery.port-name for bootstrap
+            - name: management
+              containerPort: 8558
+              protocol: TCP
+          env:
+            - name: NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: akka-cluster-demo
+    actorSystemName: akka-cluster-demo
+  name: akka-cluster-demo
+spec:
+  type: LoadBalancer
+  ports:
+    - name: "http"
+      port: 80
+      protocol: TCP
+      targetPort: 8080
+    # akka remoting
+    - name: "remoting"
+      port: 2552
+      protocol: TCP
+      targetPort: 2552
+    # akka-management bootstrap
+    # must match up with contact-point-discovery.port-name for bootstrap
+    - name: "management"
+      port: 8558
+      protocol: TCP
+      targetPort: 8558
+  selector:
+    app: akka-cluster-demo

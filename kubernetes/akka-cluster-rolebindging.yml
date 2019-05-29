@@ -2,7 +2,7 @@ kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: pod-reader
-  namespace: akka-cluster-1
+  namespace: akka-cluster-demo
 rules:
   - apiGroups: [""] # "" indicates the core API group
     resources: ["pods"]
@@ -12,11 +12,11 @@ kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: read-pods
-  namespace: akka-cluster-1
+  namespace: akka-cluster-demo
 subjects:
-  # Create the default user for the akka-cluster-1 namespace
+  # Create the default user for the akka-cluster-demo namespace
   - kind: User
-    name: system:serviceaccount:akka-cluster-1:default
+    name: system:serviceaccount:akka-cluster-demo:default
 roleRef:
   kind: Role
   name: pod-reader
