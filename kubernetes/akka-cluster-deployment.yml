@@ -5,13 +5,13 @@ metadata:
   name: akka-cluster-demo
   namespace: akka-cluster-demo
   labels:
-    app: akka-cluster-demo
-    actorSystemName: akka-cluster-demo
+    app: akka-cluster-razpi
+    actorSystemName: akka-cluster-razpi
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: akka-cluster-demo
+      app: akka-cluster-razpi
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -21,11 +21,11 @@ spec:
   template:
     metadata:
       labels:
-        app: akka-cluster-demo
-        actorSystemName: akka-cluster-demo
+        app: akka-cluster-razpi
+        actorSystemName: akka-cluster-razpi
     spec:
       containers:
-        - name: akka-cluster-demo
+        - name: akka-cluster-razpi
           image: docker-registry-default.gsa2.lightbend.com/lightbend/akka-cluster-razpi:1.0.6
           imagePullPolicy: Always
           livenessProbe:
@@ -54,8 +54,8 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: akka-cluster-demo
-    actorSystemName: akka-cluster-demo
+    app: akka-cluster-razpi
+    actorSystemName: akka-cluster-razpi
   name: akka-cluster-demo
 spec:
   type: LoadBalancer
@@ -76,4 +76,4 @@ spec:
       protocol: TCP
       targetPort: 8558
   selector:
-    app: akka-cluster-demo
+    app: akka-cluster-razpi
