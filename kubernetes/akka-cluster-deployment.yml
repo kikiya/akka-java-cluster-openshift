@@ -2,7 +2,7 @@
 apiVersion: "apps/v1beta2"
 kind: Deployment
 metadata:
-  name: akka-cluster-demo
+  name: akka-cluster-razpi
   namespace: akka-cluster-demo
   labels:
     app: akka-cluster-razpi
@@ -56,7 +56,7 @@ metadata:
   labels:
     app: akka-cluster-razpi
     actorSystemName: akka-cluster-razpi
-  name: akka-cluster-demo
+  name: akka-cluster-razpi
 spec:
   type: LoadBalancer
   ports:
